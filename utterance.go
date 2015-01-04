@@ -55,8 +55,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, err)
 		return
 	}
-	fmt.Fprintf(w, "File uploaded successfully : ")
-	fmt.Fprintf(w, header.Filename)
+	fmt.Fprintf(w, bucket.URL(fmt.Sprintf("%s.%s", name, strings.Split(mime, "/")[1])))
 }
 
 func main() {
