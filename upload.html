@@ -1,13 +1,12 @@
 <html>
-  <title>Go upload</title>
+  <head>
+    <title>Go upload</title>
+  </head>
   <body>
-
-     <form action="http://localhost:8080" method="post"
-           enctype="multipart/form-data">
+     <form action="/" method="POST" enctype="multipart/form-data">
        <label for="file">Filename:</label>
        <input type="file" name="file" id="file">
        <input type="submit" name="submit" value="Submit">
      </form>
-
   </body>
 </html>
