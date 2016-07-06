@@ -63,7 +63,7 @@ func (srv server) uploadHandler(w http.ResponseWriter, r *http.Request) {
 	// the FormFile function takes in the POST input id file
 	file, header, err := r.FormFile("file")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "form file:"+err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer file.Close()
@@ -76,7 +76,7 @@ func (srv server) uploadHandler(w http.ResponseWriter, r *http.Request) {
 		Body:        file,
 	})
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "put:"+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
