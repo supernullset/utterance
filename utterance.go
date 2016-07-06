@@ -7,6 +7,7 @@ import (
 	"math/big"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -68,7 +69,8 @@ func (srv server) uploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	name := RandomString(32)
+	// If the filename has a ending, add that to the name
+	name := RandomString(32) + filepath.Ext(header.Filename)
 	out, err := srv.PutObject(&s3.PutObjectInput{
 		Bucket:      aws.String(srv.bucket),
 		Key:         aws.String(name),
@@ -81,7 +83,6 @@ func (srv server) uploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// TODO anyway to build a bucket URL?
-
 	fmt.Fprintf(w, "name: %s\n", name)
 	fmt.Fprintf(w, out.String())
 }
